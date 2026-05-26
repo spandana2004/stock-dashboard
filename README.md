@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# 🚀 Multi-Stock Live Dashboard - DevOps Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains a live stock dashboard application deployed to Azure Kubernetes Service (AKS) using a CI/CD pipeline orchestrated by Jenkins, Docker, and GitHub.
 
-## Available Scripts
+The project demonstrates a full DevOps workflow, from application development and containerization to automated deployment to a cloud-based container orchestration platform.
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+*   **Live Stock Data:** Displays real-time stock prices and daily changes for selected tickers (IBM, AAPL, TSLA, MSFT) using the Twelve Data API.
+*   **React Frontend:** Interactive and responsive user interface for displaying stock information.
+*   **Node.js Backend (Express):** Serves API requests for stock data and also serves the static React frontend in production.
+*   **Dockerized Application:** The entire application (frontend and backend) is containerized into a single Docker image for consistent deployment.
+*   **Automated CI/CD:** A Jenkins pipeline automates the build, push, and deployment process upon changes to the GitHub repository.
+*   **Kubernetes Deployment:** Deploys the Dockerized application to Azure Kubernetes Service (AKS) for scalable and resilient hosting.
+*   **Publicly Accessible:** Exposed via an Azure LoadBalancer service, making the application accessible from anywhere.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+*   **Frontend:** React.js
+*   **Backend:** Node.js, Express.js, Axios
+*   **API:** Twelve Data
+*   **Containerization:** Docker
+*   **Version Control:** Git, GitHub
+*   **CI/CD:** Jenkins
+*   **Cloud Platform:** Microsoft Azure
+*   **Orchestration:** Kubernetes (AKS)
 
-### `npm test`
+## 📁 Repository Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+.
+├── public/                 # React public assets
+├── src/                    # React source code (App.js, etc.)
+├── server/
+│   ├── server.js           # Node.js Express backend
+│   ├── package.json        # Backend dependencies
+│   └── package-lock.json
+├── Dockerfile              # Instructions to build the Docker image
+├── Jenkinsfile             # Jenkins Pipeline definition
+├── deployment.yaml         # Kubernetes deployment and service manifests
+├── package.json            # React frontend dependencies
+├── package-lock.json
+└── README.md               # This file
+```
 
-### `npm run build`
+## ⚙️ How it Works (CI/CD Pipeline)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1.  **Code Commit:** Developers push changes to the `main` branch of this GitHub repository.
+2.  **Jenkins Trigger:** A Jenkins pipeline (defined in `Jenkinsfile`) is automatically triggered by the GitHub webhook.
+3.  **Build Docker Image:** Jenkins pulls the latest code, then builds a Docker image for the application, including both the React frontend and Node.js backend.
+4.  **Push to DockerHub:** The newly built Docker image is tagged with the Jenkins build number and pushed to DockerHub (`spandanaap/stock-dashboard`).
+5.  **Deploy to AKS:** Jenkins then uses `kubectl` to update the Kubernetes deployment on the pre-configured Azure Kubernetes Service (AKS) cluster.
+    *   It dynamically replaces the image tag in `deployment.yaml` with the newly pushed DockerHub image.
+    *   It creates/updates a Kubernetes Deployment and a LoadBalancer Service in your specified namespace (`spandana2004-ns`).
+6.  **Application Access:** The Azure LoadBalancer provisions a public IP address, making the application accessible from any web browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Deployment Status
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application is deployed to Azure Kubernetes Service and is currently accessible at:
+[http://20.219.182.201](http://20.219.182.201)
