@@ -43,17 +43,6 @@ The project demonstrates a full DevOps workflow, from application development an
 └── README.md               # This file
 ```
 
-## ⚙️ How it Works (CI/CD Pipeline)
-
-1.  **Code Commit:** Developers push changes to the `main` branch of this GitHub repository.
-2.  **Jenkins Trigger:** A Jenkins pipeline (defined in `Jenkinsfile`) is automatically triggered by the GitHub webhook.
-3.  **Build Docker Image:** Jenkins pulls the latest code, then builds a Docker image for the application, including both the React frontend and Node.js backend.
-4.  **Push to DockerHub:** The newly built Docker image is tagged with the Jenkins build number and pushed to DockerHub (`spandanaap/stock-dashboard`).
-5.  **Deploy to AKS:** Jenkins then uses `kubectl` to update the Kubernetes deployment on the pre-configured Azure Kubernetes Service (AKS) cluster.
-    *   It dynamically replaces the image tag in `deployment.yaml` with the newly pushed DockerHub image.
-    *   It creates/updates a Kubernetes Deployment and a LoadBalancer Service in your specified namespace (`spandana2004-ns`).
-6.  **Application Access:** The Azure LoadBalancer provisions a public IP address, making the application accessible from any web browser.
-
 ## 🚀 Deployment Status
 
 The application is deployed to Azure Kubernetes Service and is currently accessible at:
