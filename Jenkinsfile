@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('spandanaap-dockerhub-pat') 
+        DOCKERHUB_CREDENTIALS = credentials('jenkins-stock-dashboard-pat') 
         DOCKER_IMAGE = "spandanaap/stock-dashboard" 
         IMAGE_TAG = "${BUILD_NUMBER}"
         NAMESPACE = "spandana2004-ns" 
